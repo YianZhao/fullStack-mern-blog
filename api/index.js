@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import userRoutes from './routes/user.route.js'
 
 // 加载环境变量
 dotenv.config();
@@ -20,3 +21,7 @@ const app = express();
 app.listen(3000, () => {
   console.log("server is running on port 3000!");
 });
+
+
+//测试
+app.use('/api/user',userRoutes)
