@@ -1,7 +1,22 @@
-import express from 'express'
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const app = express()
+// 加载环境变量
+dotenv.config();
 
-app.listen(3000,()=>{
-    console.log("server is run on port 3000!")
-})
+// 连接到 MongoDB
+mongoose.connect(process.env.MONGO)
+  .then(() => {
+    console.log("mongoDB is connected");
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+const app = express();
+
+// 启动服务器
+app.listen(3000, () => {
+  console.log("server is running on port 3000!");
+});
