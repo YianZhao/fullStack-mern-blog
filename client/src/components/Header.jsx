@@ -10,6 +10,7 @@ export default function Header() {
 
   return (
     <Navbar className='border-b-2'>
+        {/* logo */}
         <Link to="/" className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
             <span className='px-2 py-1 bg-gradient-to-r from-teal-400 via-cyan-500 to-cyan-600 rounded-lg text-white'>Alex's</span>
             Blog
@@ -39,7 +40,7 @@ export default function Header() {
 
             {/* Signin按钮 */}
             <Link to='/sign-in'>
-                <Button gradientDuoTone='purpleToBlue'>
+                <Button gradientDuoTone='purpleToBlue' outline>
                     Sign In
                 </Button>
             </Link>
