@@ -29,3 +29,12 @@ app.listen(3000, () => {
 //测试
 app.use('/api/user',userRoutes)
 app.use('/api/auth',authRoutes)
+app.use((err,req,res,next)=>{
+    const statusCode = err.statusCode || 500
+    const message = err.message || 'Internal Server Error'
+    res.status(statusCode).json({
+        succes:false,
+        statusCode,
+        message
+    })
+})
