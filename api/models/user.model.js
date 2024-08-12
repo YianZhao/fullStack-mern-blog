@@ -5,20 +5,21 @@ import mongoose from "mongoose";
 
 // 定义一个用户的 Schema，用于描述用户集合中的文档结构
 const userSchema = new mongoose.Schema({
-    userName: {
-        type: String, // 定义 userName 字段的类型为字符串
-        require: true, // 该字段为必填项
-        unique: true, // 该字段的值必须唯一，不能重复
-    },
-    email: {
-        type: String, // 定义 email 字段的类型为字符串
-        require: true, // 该字段为必填项
-        unique: true, // 该字段的值必须唯一，不能重复
-    },
-    password: {
-        type: String, // 定义 password 字段的类型为字符串
-        require: true, // 该字段为必填项
-    }
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+      },
+  
+      email: {
+        type: String,
+        required: true,
+        unique: true,
+      },
+      password: {
+        type: String,
+        required: true,
+      },
 }, {
     timestamps: true // 启用时间戳，Mongoose 会自动添加 createdAt 和 updatedAt 字段
 });

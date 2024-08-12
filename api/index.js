@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js'
+import authRoutes from './routes/auth.route.js'
 
 // 加载环境变量
 dotenv.config();
@@ -16,6 +17,8 @@ mongoose.connect(process.env.MONGO)
   });
 
 const app = express();
+app.use(express.json());
+
 
 // 启动服务器
 app.listen(3000, () => {
@@ -25,3 +28,4 @@ app.listen(3000, () => {
 
 //测试
 app.use('/api/user',userRoutes)
+app.use('/api/auth',authRoutes)
