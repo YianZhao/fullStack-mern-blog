@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import bcryptjs from 'bcryptjs'
 import { errorHandler } from "../utils/error.js";
+import jwt from 'jsonwebtoken'
 
 export const signup = async(req,res,next)=>{
     const {username,email,password} = req.body;
@@ -16,6 +17,8 @@ export const signup = async(req,res,next)=>{
         password:hashedPassword
     });
 
+    
+
 
     try {
         await newUser.save();
@@ -23,8 +26,45 @@ export const signup = async(req,res,next)=>{
     } catch (error) {
         next(error)
     }
+}
+
+export const signin = async(req,res,next)=>{
+    const{email,password} = req.body
+
+    if(!email||!password||email===''||password===''){
+        return next(errorHandler(400,"All fields are required"))
+    }
 
 
+    try {
+        const validUser = await User.findOne({email})
+        // 如果没找到用户
+        if(!validUser){
+            return next(errorHandler(404,"User not find"))
+        }
+        //密码进行匹配
+        const validPassword = bcryptjs.compareSync(password,validUser.password)
+
+
+        //如果密码不匹配
+        if(!validPassword){
+            return next(errorHandler(400,"Invalid Password"))
+        }
+
+        //弄一个密钥
+        const token = jwt.sign(
+            {id : validUser._id},process.env.JWT_SECRET,
+        )
+
+        //将密码在文档中分开
+        const { password: pass, ...rest } = validUser._doc;
+
+        res.status(200).cookie('access_token',token,{
+            httpOnly:true
+        }).json(rest)
+    } catch (error) {
+        next(error)
+    }
 }
 
 
