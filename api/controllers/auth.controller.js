@@ -53,7 +53,7 @@ export const signin = async(req,res,next)=>{
 
         //弄一个密钥
         const token = jwt.sign(
-            {id : validUser._id},process.env.JWT_SECRET,
+            {id : validUser._id,isAdmin:validUser.isAdmin},process.env.JWT_SECRET,
         )
 
         //将密码在文档中分开
