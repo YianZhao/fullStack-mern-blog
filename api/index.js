@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js'
 import authRoutes from './routes/auth.route.js'
+import cookieParser from 'cookie-parser';
 
 // 加载环境变量
 dotenv.config();
@@ -18,6 +19,7 @@ mongoose.connect(process.env.MONGO)
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser())
 
 
 // 启动服务器
