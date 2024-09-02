@@ -42,7 +42,7 @@ A full-stack blogging platform built using the MERN stack (MongoDB, Express, Rea
 
 4. **Access the application:**
 
-    Open your web browser and navigate to `http://localhost:3000`.
+    Open your web browser and navigate to `http://localhost:5173`.
 
 ## Usage
 
